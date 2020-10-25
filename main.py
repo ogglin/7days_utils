@@ -89,11 +89,11 @@ def parse(url, stitle, slogo, sdesc, slang):
     for item in items:
         count -= 1
         to_file = to_files(item, url, to_file)
-        print(100/96 * (96 - count))
+        # print(100/96 * (96 - count))
     for item in items2:
         count -= 1
         to_file = to_files(item, url, to_file)
-        print(100 / 96 * (96 - count))
+        # print(100 / 96 * (96 - count))
     to_file += '</channel>\n </rss>'
     return to_file
 
