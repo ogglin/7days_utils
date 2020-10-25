@@ -3,6 +3,8 @@ import cssutils
 import datetime
 from bs4 import BeautifulSoup as bs
 
+count = 96
+
 
 def get_url(url):
     response = requests.get(url)
@@ -63,8 +65,9 @@ def to_files(item, url, to_file):
 
 
 def parse(url, stitle, slogo, sdesc, slang):
+    global count
     page = get_url(url)
-    page2 = get_url(url+'/?page=2')
+    page2 = get_url(url + '/?page=2')
     soup = bs(page.content, 'lxml')
     soup2 = bs(page2.content, 'lxml')
     items = soup.find_all("div", {"class": "article-item"})
@@ -84,21 +87,24 @@ def parse(url, stitle, slogo, sdesc, slang):
             ''' + '<lastBuildDate>' + datetime.datetime.now().strftime(
         "%d %b %Y %I:%M:%S") + ' +0000' + '</lastBuildDate>\n'
     for item in items:
+        count -= 1
         to_file = to_files(item, url, to_file)
+        print(100/96 * (96 - count))
     for item in items2:
+        count -= 1
         to_file = to_files(item, url, to_file)
+        print(100 / 96 * (96 - count))
     to_file += '</channel>\n </rss>'
     return to_file
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     days_file = parse('https://7days.us', stitle='7 Дней – новости Чикаго на русском',
                       sdesc='Издание русскоязычного сообщества в Chicago. RU новости, статьи, аналитика событий в США '
                             'и мире с точки зрения русскоязычных американцев.',
                       slogo='https://7days.us/vendor/img/logo7.png',
                       slang='ru-ru')
-    with open('7days.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/7days_files/digital/7days.xml', 'w', encoding="utf-8") as f:
         f.write(days_file)
 
     aidas_file = parse('https://aidas.us', stitle='Aidas - Čikaga naujienos, Čikagos lietuviai',
@@ -107,7 +113,7 @@ if __name__ == '__main__':
                              'iš Amerikos, Lietuvos, Europos ir viso pasaulio.',
                        slogo='https://aidas.us/vendor/img/logo_aidas.png',
                        slang='lt-lt')
-    with open('aidas.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/aidas_files/digital/aidas.xml', 'w', encoding="utf-8") as f:
         f.write(aidas_file)
 
     detroit_days_file = parse('https://detroit7days.com',
@@ -116,7 +122,5 @@ if __name__ == '__main__':
                                     ' в США и мире с точки зрения русскоязычных американцев.',
                               slogo='https://detroit7days.com/vendor/img/logo7.png',
                               slang='ru-ru')
-    with open('detroit7days.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/detroit_files/digital/detroit7days.xml', 'w', encoding="utf-8") as f:
         f.write(detroit_days_file)
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
