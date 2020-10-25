@@ -39,10 +39,36 @@ def get_month(m):
         return 'Dec'
 
 
+def to_files(item, url, to_file):
+    link = url + item.find("a").get('href')
+    title = item.find("div", {"class": "article-exert"}).find("strong").text
+    exert = item.find("div", {"class": "article-exert"}).find("p").text.replace(title, '')
+    div_style = item.find('div', {"class": "article-tumb"})['style']
+    style = cssutils.parseStyle(div_style)
+    image_url = url + style['background-image'].replace('url(', '').replace('"', '')[:-1]
+    try:
+        sdate = item.find('span', {'class': 'label-date'}).text
+        date = sdate[:5][-2:] + ' ' + get_month(int(sdate[:2])) + ' ' + sdate[-4:] + ' 12:00:00  +0000'
+    except:
+        date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
+    to_file += '<item>'
+    to_file += '<title>' + title.replace(' ', ' ').strip() + '</title>'
+    to_file += '<link>' + link + '</link>'
+    to_file += '<guid>' + link + '</guid>'
+    to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + image_url + '"/> ' + \
+               exert.replace(' ', ' ').strip() + ' ]]>' + '</description>'
+    to_file += '<pubDate>' + date + '</pubDate>'
+    to_file += '</item>\n'
+    return to_file
+
+
 def parse(url, stitle, slogo, sdesc, slang):
     page = get_url(url)
+    page2 = get_url(url+'/?page=2')
     soup = bs(page.content, 'lxml')
+    soup2 = bs(page2.content, 'lxml')
     items = soup.find_all("div", {"class": "article-item"})
+    items2 = soup2.find_all("div", {"class": "article-item"})
     to_file = '''<rss version="2.0">
             <channel>
                 <title>''' + stitle + '''</title>
@@ -58,25 +84,9 @@ def parse(url, stitle, slogo, sdesc, slang):
             ''' + '<lastBuildDate>' + datetime.datetime.now().strftime(
         "%d %b %Y %I:%M:%S") + ' +0000' + '</lastBuildDate>\n'
     for item in items:
-        link = url + item.find("a").get('href')
-        title = item.find("div", {"class": "article-exert"}).find("strong").text
-        exert = item.find("div", {"class": "article-exert"}).find("p").text.replace(title, '')
-        div_style = item.find('div', {"class": "article-tumb"})['style']
-        style = cssutils.parseStyle(div_style)
-        image_url = url + style['background-image'].replace('url(', '').replace('"', '')[:-1]
-        try:
-            sdate = item.find('span', {'class': 'label-date'}).text
-            date = sdate[:5][-2:] + ' ' + get_month(int(sdate[:2])) + ' ' + sdate[-4:] + ' 12:00:00  +0000'
-        except:
-            date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
-        to_file += '<item>'
-        to_file += '<title>' + title.replace(' ', ' ').strip() + '</title>'
-        to_file += '<link>' + link + '</link>'
-        to_file += '<guid>' + link + '</guid>'
-        to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + image_url + '"/> ' + \
-                   exert.replace(' ', ' ').strip() + ' ]]>' + '</description>'
-        to_file += '<pubDate>' + date + '</pubDate>'
-        to_file += '</item>\n'
+        to_file = to_files(item, url, to_file)
+    for item in items2:
+        to_file = to_files(item, url, to_file)
     to_file += '</channel>\n </rss>'
     return to_file
 
