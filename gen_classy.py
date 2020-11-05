@@ -85,7 +85,6 @@ def to_files(place, filename, category, classys):
         "%d %b %Y %I:%M:%S") + ' +0000' + '</lastBuildDate>\n'
     date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
     for classy in classys:
-        print(classy)
         to_file += '<item>'
         to_file += '<title>' + classy[2] + '</title>'
         to_file += '<link>' + url + '</link>'
@@ -94,7 +93,6 @@ def to_files(place, filename, category, classys):
         to_file += '<pubDate>' + date + '</pubDate>'
         to_file += '</item>\n'
     to_file += '</channel>\n </rss>'
-    print(filename, to_file)
     with open(path + filename + '.xml', 'w', encoding="utf-8") as f:
         f.write(to_file)
 
