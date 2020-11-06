@@ -86,7 +86,7 @@ def to_files(place, filename, category, classys):
     for classy in classys:
         to_file += '<item>'
         to_file += '<title>' + classy[2] + '</title>'
-        to_file += '<link>' + classy_url + classy[0] + '</link>'
+        to_file += '<link>' + classy_url + str(classy[0]) + '</link>'
         to_file += '<guid>' + url + '</guid>'
         to_file += '<description>' + '<![CDATA[<p>' + classy[1] + '</p>]]>' + '</description>'
         to_file += '<pubDate>' + date + '</pubDate>'
