@@ -85,10 +85,10 @@ def to_files(place, filename, category, classys):
     date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
     for classy in classys:
         to_file += '<item>'
-        to_file += '<title>' + classy[2] + '</title>'
+        to_file += '<title>' + classy[1] + '</title>'
         to_file += '<link>' + classy_url + str(classy[0]) + '</link>'
         to_file += '<guid>' + classy_url + str(classy[0]) + '</guid>'
-        to_file += '<description>' + '<![CDATA[<p>' + classy[1] + '</p>]]>' + '</description>'
+        to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + slogo + '"/> ]]>' + '</description>'
         to_file += '<pubDate>' + date + '</pubDate>'
         to_file += '</item>\n'
     to_file += '</channel>\n </rss>'
