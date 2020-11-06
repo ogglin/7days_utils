@@ -41,8 +41,7 @@ def get_classy(adv_id1, adv_id2, place):
             if category[0] == cat:
                 text = re.sub(r'[*]', '', classy[3], 0, re.I).strip()
                 temp_classy.append((cid, text, cat))
-        if len(temp_classy) > 0:
-            to_files(place, category[1], category[0], temp_classy)
+        to_files(place, category[1], category[0], temp_classy)
         temp_classy = []
 
 
