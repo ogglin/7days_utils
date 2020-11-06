@@ -52,6 +52,9 @@ def to_files(place, filename, category, classys):
     slogo = ''
     url = ''
     path = ''
+    classy_url = ''
+    image = ''
+    # image = '<image><url>' + slogo + '</url> <title>' + stitle + '</title> <link>' + url + '</link> </image>'
     if place == '7days':
         stitle = 'Частные объявления'
         sdesc = '''Ищете работу? Хотите познакомиться? Хотите снять квартиру? Просмотрите наши объявления. 
@@ -60,6 +63,7 @@ def to_files(place, filename, category, classys):
         slogo = 'https://7days.us/vendor/img/logo7.png'
         url = 'https://7days.us/chastnye-obyavleniya'
         path = '/var/www/7days_files/digital/'
+        classy_url = 'https://7days.us/chastnye-obyavleniya/item?id='
     if place == 'aidas':
         stitle = 'Asmeniniai skelbimai'
         sdesc = '''Ieškote darbo? Norėtumėte susipažinti? Išsinuomoti butą? Peržiūrėkite mūsų skelbimus. 
@@ -68,6 +72,7 @@ def to_files(place, filename, category, classys):
         slogo = 'https://aidas.us/vendor/img/logo_aidas.png'
         url = 'https://aidas.us/private-ads'
         path = '/var/www/aidas_files/digital/'
+        classy_url = 'https://aidas.us/private-ads/item?id='
     to_file = '''<rss version="2.0">
                 <channel>
                     <title>''' + stitle + '''</title>
@@ -75,18 +80,13 @@ def to_files(place, filename, category, classys):
                     <description>''' + sdesc + '''</description>
                     <language>''' + slang + '''</language>
                     <copyright>Copyright Ethnic Media USA © 2014-2020 All rights reserved.</copyright>
-                    <image>
-                        <url>''' + slogo + '''</url>
-                        <title>''' + stitle + '''</title>
-                        <link>''' + url + '''</link>
-                    </image>
-                ''' + '<lastBuildDate>' + datetime.datetime.now().strftime(
+                ''' + image + '<lastBuildDate>' + datetime.datetime.now().strftime(
         "%d %b %Y %I:%M:%S") + ' +0000' + '</lastBuildDate>\n'
     date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
     for classy in classys:
         to_file += '<item>'
         to_file += '<title>' + classy[2] + '</title>'
-        to_file += '<link>' + url + '</link>'
+        to_file += '<link>' + classy_url + classy[0] + '</link>'
         to_file += '<guid>' + url + '</guid>'
         to_file += '<description>' + '<![CDATA[<p>' + classy[1] + '</p>]]>' + '</description>'
         to_file += '<pubDate>' + date + '</pubDate>'
