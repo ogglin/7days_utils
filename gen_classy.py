@@ -53,14 +53,13 @@ def to_files(place, filename, category, classys):
     url = ''
     path = ''
     classy_url = ''
-    image = ''
     # image = '<image><url>' + slogo + '</url> <title>' + stitle + '</title> <link>' + url + '</link> </image>'
     if place == '7days':
         stitle = 'Частные объявления'
         sdesc = '''Ищете работу? Хотите познакомиться? Хотите снять квартиру? Просмотрите наши объявления. 
         Ищете сотрудников? Хотите сдать квартиру в рент? Разместите свое объявление.'''
         slang = 'ru'
-        slogo = 'https://7days.us/vendor/img/logo7.png'
+        slogo = 'https://archive.7days.us/cls_fon.jpg'
         url = 'https://7days.us/chastnye-obyavleniya'
         path = '/var/www/7days_files/digital/'
         classy_url = 'https://7days.us/chastnye-obyavleniya/item?id='
@@ -69,10 +68,11 @@ def to_files(place, filename, category, classys):
         sdesc = '''Ieškote darbo? Norėtumėte susipažinti? Išsinuomoti butą? Peržiūrėkite mūsų skelbimus. 
         Ieškote darbuotojų? Nuomojate butą? Įdėkite savo skelbimą.'''
         slang = 'lt'
-        slogo = 'https://aidas.us/vendor/img/logo_aidas.png'
+        slogo = 'https://archive.aidas.us/cls_fon.jpg'
         url = 'https://aidas.us/private-ads'
         path = '/var/www/aidas_files/digital/'
         classy_url = 'https://aidas.us/private-ads/item?id='
+    image = '<image><url>' + slogo + '</url> <title>' + stitle + '</title> <link>' + url + '</link> </image>'
     to_file = '''<rss version="2.0">
                 <channel>
                     <title>''' + stitle + '''</title>
