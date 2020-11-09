@@ -19,11 +19,11 @@ def to_files(item, url, to_file):
     except:
         date = datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + ' +0000'
     to_file += '<item>'
-    to_file += '<title>' + title.replace(' ', ' ').strip() + '</title>'
+    to_file += '<title>' + title.replace('&', '&amp;').replace(' ', ' ').strip() + '</title>'
     to_file += '<link>' + link + '</link>'
     to_file += '<guid>' + link + '</guid>'
     to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + image_url + '"/> ' + \
-               exert.replace(' ', ' ').strip() + ' ]]>' + '</description>'
+               exert.replace(' ', ' ').replace('&', '&amp;').strip() + ' ]]>' + '</description>'
     to_file += '<pubDate>' + date + '</pubDate>'
     to_file += '</item>\n'
     return to_file
