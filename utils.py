@@ -33,6 +33,33 @@ def sql_q(q):
     return results
 
 
+def sql_q_days(q):
+    results = []
+    try:
+        conn = mariadb.connect(
+            user="7days_any",
+            password="shaisha8Eexe",
+            host="148.72.172.126",
+            port=3306,
+            database="7days"
+
+        )
+        # Get Cursor
+        cur = conn.cursor()
+        try:
+            cur.execute(q)
+            results = cur.fetchall()
+        except mariadb.Error as e:
+            print(f"Error: {e}")
+        # conn.commit()
+        # conn.close()
+    except mariadb.Error as e:
+        print(f"Error connecting to MariaDB Platform: {e}")
+        sys.exit(1)
+
+    return results
+
+
 def get_url(url):
     response = requests.get(url)
     if response.status_code == 200:
