@@ -84,7 +84,7 @@ def get_aidas_business():
             alias = item[3]
             to_file += '<item>'
             to_file += '<title>' + title.replace('&', '&amp;').replace(' ', ' ').strip() + '</title>'
-            to_file += '<link>' + url + '</link>'
+            to_file += '<link>' + url + cat[0] + '/' + alias + '</link>'
             to_file += '<guid>' + url + cat[0] + '/' + alias + '</guid>'
             to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + image + '"/> ' + \
                        desc.strip() + ' ]]>' + '</description>'
@@ -131,7 +131,7 @@ def get_7days_business():
             alias = item[3]
             to_file += '<item>'
             to_file += '<title>' + title.replace('&', '&amp;').replace(' ', ' ').strip() + '</title>'
-            to_file += '<link>' + url + '</link>'
+            to_file += '<link>' + url + cat[0] + '/' + alias + '</link>'
             to_file += '<guid>' + url + cat[0] + '/' + alias + '</guid>'
             to_file += '<description>' + '<![CDATA[<img align="left" hspace="5" src="' + image + '"/> ' + \
                        desc.strip() + ' ]]>' + '</description>'
