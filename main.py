@@ -4,6 +4,6 @@ from gen_business import init as init_business
 import re
 
 if __name__ == '__main__':
-    init_news()
+    # init_news()
     init_classy()
     init_business()

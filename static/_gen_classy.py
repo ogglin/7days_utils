@@ -4,9 +4,9 @@ import re
 from utils import *
 
 main_url_aidas = 'https://aidas.us/private-ads/'
-file_url_aidas = '/var/www/aidas_files/digital/'
+file_url_aidas = '/var/www/archive/'
 main_url_7days = 'https://7days.us/chastnye-obyavleniya/'
-file_url_7days = '/var/www/7days_files/digital/'
+file_url_7days = '/var/www/archive/'
 categories = [
     ('goryachie_predlojeniya', 'Горячие предложения'),
     ('ishchu_rent', 'Ищу рент'),
@@ -25,7 +25,6 @@ categories = [
     ('', 'Real Estate abroad'),
     ('', 'Miscellaneous'),
 ]
-
 
 
 def get_classys(title, link, pages):

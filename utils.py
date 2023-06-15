@@ -1,20 +1,22 @@
-import cssutils
-import datetime
-import requests
-import mariadb
 import sys
+import datetime
+import cssutils
+import mariadb
+import requests
 from bs4 import BeautifulSoup as bs
+
+from env import *
 
 
 def sql_q(q):
     results = []
     try:
         conn = mariadb.connect(
-            user="core_api",
-            password="timAnoch",
-            host="core.emcns.us",
+            user=CORE_USER,
+            password=CORE_PASS,
+            host=CORE_HOST,
             port=3306,
-            database="core"
+            database=CORE_DB
 
         )
         # Get Cursor
@@ -38,19 +40,19 @@ def sql_q_days(q, site):
     try:
         if site == '7days':
             conn = mariadb.connect(
-                user="7days_any",
-                password="shaisha8Eexe",
-                host="148.72.172.126",
+                user=SEVENDAYS_USER,
+                password=SEVENDAYS_PASS,
+                host=SEVENDAYS_HOST,
                 port=3306,
-                database="7days"
+                database=SEVENDAYS_DB
             )
         if site == 'aidas':
             conn = mariadb.connect(
-                user="aidas_any",
-                password="PltcmGfhjkzYtn573",
-                host="148.72.171.145",
+                user=AIDAS_USER,
+                password=AIDAS_PASS,
+                host=AIDAS_HOST,
                 port=3306,
-                database="aidas"
+                database=AIDAS_DB
             )
         # Get Cursor
         cur = conn.cursor()

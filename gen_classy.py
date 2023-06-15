@@ -4,9 +4,9 @@ import re
 from utils import *
 
 main_url_aidas = 'https://aidas.us/private-ads/'
-file_url_aidas = '/var/www/aidas_files/digital/'
+file_url_aidas = local_path
 main_url_7days = 'https://7days.us/chastnye-obyavleniya/'
-file_url_7days = '/var/www/7days_files/digital/'
+file_url_7days = local_path
 categories = [
     ('Purchase-Sale', 'purchase_sale'),
     ('Business for sale', 'business_sale'),
@@ -51,7 +51,6 @@ def to_files(place, filename, category, classys):
     slang = ''
     slogo = ''
     url = ''
-    path = ''
     classy_url = ''
     # image = '<image><url>' + slogo + '</url> <title>' + stitle + '</title> <link>' + url + '</link> </image>'
     if place == '7days':
@@ -61,7 +60,6 @@ def to_files(place, filename, category, classys):
         slang = 'ru'
         slogo = 'https://archive.7days.us/cls_fon.jpg'
         url = 'https://7days.us/chastnye-obyavleniya'
-        path = '/var/www/7days_files/digital/'
         classy_url = 'https://7days.us/chastnye-obyavleniya/item?id='
     if place == 'aidas':
         stitle = 'Asmeniniai skelbimai'
@@ -70,7 +68,6 @@ def to_files(place, filename, category, classys):
         slang = 'lt'
         slogo = 'https://archive.aidas.us/cls_fon.jpg'
         url = 'https://aidas.us/private-ads'
-        path = '/var/www/aidas_files/digital/'
         classy_url = 'https://aidas.us/private-ads/item?id='
     image = '<image><url>' + slogo + '</url> <title>' + stitle + '</title> <link>' + url + '</link> </image>'
     to_file = '''<rss version="2.0">
@@ -92,7 +89,7 @@ def to_files(place, filename, category, classys):
         to_file += '<pubDate>' + date + '</pubDate>'
         to_file += '</item>\n'
     to_file += '</channel>\n </rss>'
-    with open(path + filename + '.xml', 'w', encoding="utf-8") as f:
+    with open(local_path + filename + '.xml', 'w', encoding="utf-8") as f:
         f.write(to_file)
 
 

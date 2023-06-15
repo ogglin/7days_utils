@@ -1,5 +1,7 @@
 import re
 
+from env import local_path
+
 from utils import *
 
 category_list_7days = [
@@ -91,7 +93,7 @@ def get_aidas_business():
             to_file += '<pubDate>' + datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + '</pubDate>'
             to_file += '</item>\n'
         to_file += '</channel>\n </rss>'
-        with open('/var/www/aidas_files/digital/business/'+cat[0]+'.xml', 'w', encoding="utf-8") as f:
+        with open(local_path+'business/'+cat[0]+'.xml', 'w', encoding="utf-8") as f:
             f.write(to_file)
 
 
@@ -138,7 +140,7 @@ def get_7days_business():
             to_file += '<pubDate>' + datetime.datetime.now().strftime("%d %b %Y %I:%M:%S") + '</pubDate>'
             to_file += '</item>\n'
         to_file += '</channel>\n </rss>'
-        with open('/var/www/7days_files/digital/business/' + cat[0] + '.xml', 'w', encoding="utf-8") as f:
+        with open(local_path+'business/' + cat[0] + '.xml', 'w', encoding="utf-8") as f:
             f.write(to_file)
 
 
