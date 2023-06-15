@@ -68,7 +68,7 @@ def init():
                       slogo='https://7days.us/vendor/img/logo7.png',
                       slang='ru-ru', pages=3)
     # with open('7days.xml', 'w', encoding="utf-8") as f:
-    with open('/var/www/7days_files/digital/7days.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/archive/7days.xml', 'w', encoding="utf-8") as f:
         f.write(days_file)
 
     aidas_file = parse('https://aidas.us', stitle='Aidas - Čikaga naujienos, Čikagos lietuviai',
@@ -78,7 +78,7 @@ def init():
                        slogo='https://aidas.us/vendor/img/logo_aidas.png',
                        slang='lt-lt', pages=3)
     # with open('aidas.xml', 'w', encoding="utf-8") as f:
-    with open('/var/www/aidas_files/digital/aidas.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/archive/aidas.xml', 'w', encoding="utf-8") as f:
         f.write(aidas_file)
 
     detroit_days_file = parse('https://detroit7days.com',
@@ -88,5 +88,5 @@ def init():
                               slogo='https://detroit7days.com/vendor/img/logo7.png',
                               slang='ru-ru', pages=3)
     # with open('detroit7days.xml', 'w', encoding="utf-8") as f:
-    with open('/var/www/detroit_files/digital/detroit7days.xml', 'w', encoding="utf-8") as f:
+    with open('/var/www/archive/detroit7days.xml', 'w', encoding="utf-8") as f:
         f.write(detroit_days_file)

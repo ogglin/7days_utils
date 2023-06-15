@@ -12,7 +12,7 @@ def sql_q(q):
         conn = mariadb.connect(
             user="core_api",
             password="timAnoch",
-            host="148.72.172.127",
+            host="core.emcns.us",
             port=3306,
             database="core"
 
